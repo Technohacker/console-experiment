@@ -84,5 +84,19 @@ function start() {
               }
           }, 500);
       })
-      .display("Ah! You've found me :D");
+      .display("Ah! You've found me :D")
+      .display("I'm still hiding")
+      .display("Interact with the DOM to show me")
+      .display("Task: Unhide Sol")
+      .display("HINT: Set the element style")
+      .addAction(() => {
+          cM.pauseActions();
+          let intrvl = setInterval(() => {
+              if (window.userInput.sol.style.display === "block") {
+                  clearInterval(intrvl);
+                  cM.resumeActions();
+              }
+          }, 500);
+      })
+      .display("Now you see me :)");
 }
