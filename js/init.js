@@ -8,9 +8,11 @@ class ConsoleMessages {
 
         // Message printing loop
         setInterval(() => {
-            let action = this.actions.shift();
-            if (!this.waitTillFinished && action) {
-                action();
+            if (!this.waitTillFinished) {
+                let action = this.actions.shift();
+                if (action) {
+                    action();
+                }
             }
         }, 2000);
     }
@@ -75,7 +77,6 @@ function start() {
       .display("HINT: Use the DOM JS functions")
       .addAction(() => {
           cM.pauseActions();
-          console.log(sol);
           let intrvl = setInterval(() => {
               if (window.userInput.sol === sol) {
                   clearInterval(intrvl);
