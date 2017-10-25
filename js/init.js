@@ -53,7 +53,7 @@ function start() {
 
     let cM = new ConsoleMessages(),
         user = {},
-        sol = document.querySelector("#sol");
+        sol = new Sol();
 
     cM.display("Hello.")
       .display("I am Sol.")
@@ -78,7 +78,7 @@ function start() {
       .addAction(() => {
           cM.pauseActions();
           let intrvl = setInterval(() => {
-              if (window.userInput.sol === sol) {
+              if (window.userInput.sol === sol.element) {
                   clearInterval(intrvl);
                   cM.resumeActions();
               }
@@ -86,7 +86,7 @@ function start() {
       })
       .display("Ah! You've found me :D")
       .display("I'm still hiding")
-      .display("Interact with the DOM to show me")
+      .display("Interact with the DOM to unhide me")
       .display("Task: Unhide Sol")
       .display("HINT: Set the element style")
       .addAction(() => {
@@ -98,5 +98,9 @@ function start() {
               }
           }, 500);
       })
-      .display("Now you see me :)");
+      .display("Now you see me :)")
+      .addAction(() => {
+          sol.setEmotion("happy");
+          console.log(":)");
+      });
 }
