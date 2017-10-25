@@ -1,0 +1,54 @@
+@keyframes pulse
+{
+    0%
+    {
+        opacity: .2;
+    }
+    50%
+    {
+        opacity: 1;
+    }
+    100%
+    {
+        opacity: .2;
+    }
+}
+
+body
+{
+    background-color: black;
+}
+
+h1
+{
+    font-family: -apple-system, BlinkMacSystemFont,
+    'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+#user-message
+{
+    line-height: 100vh;
+
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+
+    animation: pulse 3s infinite;
+    text-align: center;
+}
+
+#sol
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: none;
+
+    width: 50px;
+    height: 50px;
+    margin-top: -25px;
+    margin-left: -25px;
+}
