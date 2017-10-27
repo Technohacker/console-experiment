@@ -1,3 +1,8 @@
+*
+{
+    box-sizing: border-box;
+}
+
 @keyframes pulse
 {
     0%
@@ -19,7 +24,17 @@ body
     background-color: black;
 }
 
-h1
+audio
+{
+    display: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
 {
     font-family: -apple-system, BlinkMacSystemFont,
     'Segoe UI', 'Roboto', 'Oxygen',
@@ -51,4 +66,29 @@ h1
     height: 50px;
     margin-top: -25px;
     margin-left: -25px;
+}
+
+#hud
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: none;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+#player-stats
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 200px;
+    height: 100px;
+    padding: 10px 25px;
+
+    border: solid 2px lime;
 }

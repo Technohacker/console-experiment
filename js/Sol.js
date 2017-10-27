@@ -10,7 +10,8 @@ class Sol {
             thoughtful: ":?",
             joyous: "^-^",
             wonder: ":O",
-            neutral: "o_o"
+            neutral: "o_o",
+            wink: ";)"
         };
     }
 
