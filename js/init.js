@@ -1,4 +1,4 @@
-console.log("Begin the game with start()");
+console.log("Begin the game with game.start()");
 
 class ConsoleMessages {
     constructor() {
@@ -46,25 +46,48 @@ class ConsoleMessages {
     }
 }
 
-function start() {
-    window.userInput = {};
+window.game = {
+    cM: new ConsoleMessages(),
+    sol: new Sol(),
+    start() {
+        window.userInput = {};
 
-    document.querySelector("#user-message").style.display = "none";
+        document.querySelector("#user-message").style.display = "none";
 
-    let cM = new ConsoleMessages(),
-        userData = JSON.parse(window.localStorage.getItem("userData"));
+        let userData = JSON.parse(window.localStorage.getItem("userData"));
 
-    if (userData) {
-        document.querySelector("#hud").style.display = "block";
-        document.querySelector("#player-name").innerText = userData.name;
-        let userLevel = ("0000000" + userData.level.toString(2)).substr(-8);
-        document.querySelector("#player-level").innerText = userLevel;
-        document.querySelector("audio").play();
-        if (!userData.progress.intro) {
-            new Beginning().start(cM);
+        if (userData) {
+            document.querySelector("#hud").style.display = "block";
+            document.querySelector("#play-area").style.display = "block";
+
+            document.querySelector("#player-name").innerText = userData.name;
+            let userLevel = ("0000000" + userData.level.toString(2)).substr(-8);
+            document.querySelector("#player-level").innerText = userLevel;
+            document.querySelector("audio").play();
+            if (!userData.progress.intro) {
+                new Beginning().start();
+            }
+            console.log("Loaded gamesave");
+        } else {
+            new Beginning().start();
         }
-        console.log("Loaded gamesave");
-    } else {
-        new Beginning().start(cM);
+    },
+    set level(levelElem) {
+        console.log("Current level: ", levelElem);
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+            document.querySelector("#levels").style.display = "none";
+            document.querySelector("#play-area").appendChild(this.response.querySelector("#levelData"));
+            let script = document.createElement("script");
+            script.src = `levels/${levelElem.id}/${levelElem.id}.js`
+            console.log(script);
+            document.body.appendChild(script);
+        }
+        xhr.responseType = "document";
+        xhr.open("GET", `levels/${levelElem.id}/${levelElem.id}.html`);
+        xhr.send();
+    },
+    returnToMainMenu() {
+        let currentLevel = document.querySelector("#levelData");
     }
 }

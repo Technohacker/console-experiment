@@ -1,18 +1,17 @@
 class Beginning {
-    constructor() {
-        this.sol = new Sol();
-    }
+    constructor() { }
 
-    start(cM) {
+    start() {
         let user = {};
 
-        cM.display("Hello.")
+        game.cM
+          .display("Hello.")
           .display("I am Sol.")
           .addAction(() => {
-              cM.pauseActions();
+              game.cM.pauseActions();
               user.name = prompt("Sol: Who are you?");
               user.level = 0x00;
-              cM.resumeActions();
+              game.cM.resumeActions();
           })
           .addAction(() => {
               document.querySelector("#player-name").innerText = user.name;
@@ -31,11 +30,11 @@ class Beginning {
           .display("Task: Find Sol in the DOM, and set window.userInput.sol to it")
           .display("HINT: Use the DOM JS functions")
           .addAction(() => {
-              cM.pauseActions();
+              game.cM.pauseActions();
               let intrvl = setInterval(() => {
-                  if (window.userInput.sol === this.sol.element) {
+                  if (window.userInput.sol === game.sol.element) {
                       clearInterval(intrvl);
-                      cM.resumeActions();
+                      game.cM.resumeActions();
                   }
               }, 500);
           })
@@ -45,20 +44,20 @@ class Beginning {
           .display("Task: Unhide Sol")
           .display("HINT: Set the element style")
           .addAction(() => {
-              cM.pauseActions();
+              game.cM.pauseActions();
               let intrvl = setInterval(() => {
                   if (window.userInput.sol.style.display === "block") {
                       clearInterval(intrvl);
-                      cM.resumeActions();
+                      game.cM.resumeActions();
                   }
               }, 500);
           })
           .addAction(() => {
-              this.sol.setEmotion("happy");
+              game.sol.setEmotion("happy");
               console.log("Now you see me :)");
           })
           .addAction(() => {
-              this.sol.setEmotion("neutral");
+              game.sol.setEmotion("neutral");
               console.log("There is a lot more to this world, but it's all hidden");
           })
           .display("You have to interact with it to open it up more")
@@ -66,18 +65,24 @@ class Beginning {
           .display("Task: Find your HUD in the DOM and unhide it")
           .addAction(() => {
               let hud = document.querySelector("#hud");
-              cM.pauseActions();
+              game.cM.pauseActions();
               let intrvl = setInterval(() => {
                   if (hud.style.display === "block") {
                       clearInterval(intrvl);
-                      cM.resumeActions();
+                      game.cM.resumeActions();
                   }
               }, 500);
           })
           .display("Easy!")
+          .display("The HUD may look sparse now, more will open up later")
           .display("The little box at the top is your stats")
           .display("It shows your level")
           .display("Your level increases as you progress in the DOM")
+          .addAction(() => {
+              document.querySelector("#play-area").style.display = "block";
+              console.log("To progress in the DOM, you go through levels");
+          })
+          .display("Select a level by setting game.level to the respective element")
           .display("Oh, before I go...")
           .display("Here's some music for you")
           .addAction(() => {
@@ -85,11 +90,11 @@ class Beginning {
           })
           .display("Your adventure starts here")
           .addAction(() => {
-              this.sol.setEmotion("wink");
+              game.sol.setEmotion("wink");
               console.log("Good luck!");
           })
           .addAction(() => {
-              this.sol.element.style.display = "none";
+              game.sol.element.style.display = "none";
               user.progress = {
                   intro: true
               };
